@@ -1,0 +1,560 @@
+#VRML V2.0 utf8
+Background {
+ backUrl     "img/background.jpg"
+  leftUrl     "img/background.jpg"
+  frontUrl    "img/background.jpg"
+  rightUrl    "img/background.jpg"
+  topUrl      "img/background.jpg"
+  bottomUrl   "img/background.jpg"  
+}
+
+Viewpoint {
+fieldOfView 0.785398
+position 0 0 10
+orientation 0 0 1 0
+description ""
+jump TRUE
+}
+
+Transform {
+   translation -2.5 3 0
+   children [
+      Shape {
+	 appearance Appearance {
+	    material Material {
+	       diffuseColor 1 1 0
+	    }
+	 }
+	 geometry Text {
+	    string [
+		    "Solar System",
+		    "By Swati(18075060) and Bavanya(18075034)"
+		   ]
+	    fontStyle FontStyle {
+	       size 0.15
+	    }
+	 }
+      }
+     ]
+}
+
+
+Sound {
+   minBack 5
+   minFront 5
+   maxFront 50
+   minFront 50
+   source AudioClip {
+      description "planet pass by"
+      loop TRUE
+      url "sounds/VOLUME_sound3.wav"
+   }
+   spatialize TRUE
+}
+
+Sound {
+   minBack 5
+   minFront 5
+   maxFront 50
+   minFront 50
+   source AudioClip {
+      description "planet pass by"
+      loop TRUE
+      url "sounds/VOLUME_sound1.wav"
+   }
+   spatialize TRUE
+}
+
+DEF SUN Transform {  
+children [
+
+        DirectionalLight {
+            direction  9.0 9.0 9.0
+            intensity 9.0
+            ambientIntensity 0.9
+            color 1.0 0.6 0.0
+        },
+        DirectionalLight {
+            direction  -9.0 -9.0 -9.0
+            intensity 9.0
+            ambientIntensity 1.0
+            color 1.0 0.6 0.0
+        },
+Shape{
+appearance Appearance {
+material Material {
+diffuseColor 0.85 0.85 1.0
+}
+
+texture ImageTexture {
+url "img/sun.png"
+}
+}
+
+geometry Sphere {
+radius 1.7
+}
+}
+
+]
+}
+
+DEF Planet4R Transform {
+translation 6.0 0.0 0.0
+center -6.0 0.0 0.0  
+children [
+Shape{
+appearance Appearance {
+material Material {
+transparency 0.5
+}
+texture ImageTexture {
+url "img/saturn.png"
+}
+}
+geometry Cylinder {
+radius 1.2
+height 0.001
+
+}
+}
+]
+}
+
+
+
+Group {
+   children [ 
+      #sun is not revolving
+
+      # Several orbiting planets
+      DEF Planet1 Transform {
+  translation 2.2 0.0 0.0
+  center -2.2 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/mercury.jpg" }
+     }
+     geometry Sphere { radius 0.22 }
+  }
+      },
+      DEF Planet2 Transform {
+  translation 3.0 0.0 0.0
+  center -3.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/venus.png" }
+     }
+     geometry Sphere { radius 0.32 }
+  }
+      },
+      DEF Planet3 Transform {
+  translation 4.0 0.0 0.0
+  center -4.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/Earth.jpg" }
+     }
+     geometry Sphere { radius 0.45 }
+  }
+      },
+      DEF Planet4 Transform {
+  translation 6.0 0.0 0.0
+  center -6.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+	texture ImageTexture {
+   		url "img/saturn.png" }
+        }
+     geometry Sphere { radius 0.71 }
+  }
+      },     
+    
+    DEF Planet5 Transform {
+  translation 8.2 0.0 0.0
+  center -8.2 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/jupiter.png" }
+     }
+     geometry Sphere { radius 1.0 }
+  }
+      },    
+     
+     DEF Planet6 Transform {
+  translation 9.0 0.0 0.0
+  center -9.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/neptune.png" }
+     }
+     geometry Sphere { radius 0.32 }
+  }
+      },    
+
+ DEF Planet7 Transform {
+  translation 10.1 0.0 0.0
+  center -10.1 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/uranus.jpg" }
+     }
+     geometry Sphere { radius 0.8 }
+  }
+      },
+
+
+      # Animation clocks, one per planet ans sun...
+      DEF Clock1 TimeSensor {#
+  cycleInterval 2.0
+  loop TRUE
+      },
+      DEF Clock2 TimeSensor {
+  cycleInterval 3.5
+  loop TRUE
+      },
+      DEF Clock3 TimeSensor {
+  cycleInterval 5.0
+  loop TRUE
+      },
+      DEF Clock4 TimeSensor {
+  cycleInterval 6.5
+  loop TRUE
+      },
+      DEF Clock5 TimeSensor {
+  cycleInterval 8.0
+  loop TRUE
+      },
+      DEF Clock6 TimeSensor {
+  cycleInterval 9.5
+  loop TRUE
+      },
+      DEF Clock7 TimeSensor {
+  cycleInterval 10.0
+  loop TRUE
+      },
+	DEF SUNTIMER TimeSensor {
+    loop TRUE
+    cycleInterval 10.0
+}
+
+      # Animation paths, one per planet and sun...
+      DEF Path1 OrientationInterpolator {
+  key [ 0.0, 0.50, 1.0 ]
+  keyValue [  #especifica la lista de las rotaciones claves, cada rotación tiene un grupo de 4 valores
+    0 0.995037 0.0995037 0.0,  # los 1eros 3 valores identifican a X, Y, Z del eje de rotación, 
+ # el 4to valor identifica el ángulo de rotación (en grados).
+    0 0.995037 0.0995037 3.14,
+    0 0.995037 0.0995037 6.28
+   ]
+      },
+      DEF Path2 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    -0.0775436 0.996989 0  0.0,
+    -0.0775436 0.996989 0  3.14,
+    -0.0775436 0.996989 0  6.28
+   ]
+      },
+      DEF Path3 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    0 0.996989 0.0775436 0.0,
+    0 0.996989 0.0775436 3.14,
+    0 0.996989 0.0775436 6.28
+   ]
+      },
+      DEF Path4 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    -0.0775436 0.996989 0  0.0,
+    -0.0775436 0.996989 0  3.14,
+    -0.0775436 0.996989 0  6.28
+   ]
+      },
+
+      DEF Path5 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    0 0.996989 0.0775436 0.0,
+    0 0.996989 0.0775436 3.14,
+    0 0.996989 0.0775436 6.28
+   ]
+      },
+
+	DEF SUNROTATOR OrientationInterpolator {
+    key [ 0, 0.5, 1 ]
+    keyValue [ 0 1 0 0, 0 1 0 3.141, 0 1 0 6.282 ]
+},
+
+      DEF Path6 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    -0.0775436 0.996989 0  0.0,
+    -0.0775436 0.996989 0  3.14,
+    -0.0775436 0.996989 0  6.28
+   ]
+      },
+
+DEF Path7 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    0 0.996989 0.0775436 0.0,
+    0 0.996989 0.0775436 3.14,
+    0 0.996989 0.0775436 6.28
+   ]
+      }
+
+     ]
+}
+ROUTE Clock1.fraction_changed TO Path1.set_fraction
+ROUTE Clock2.fraction_changed TO Path2.set_fraction
+ROUTE Clock3.fraction_changed TO Path3.set_fraction
+ROUTE Clock4.fraction_changed TO Path4.set_fraction
+ROUTE Clock5.fraction_changed TO Path5.set_fraction
+ROUTE Clock6.fraction_changed TO Path6.set_fraction
+ROUTE Clock7.fraction_changed TO Path7.set_fraction
+ROUTE Path1.value_changed TO Planet1.set_rotation
+ROUTE Path2.value_changed TO Planet2.set_rotation
+ROUTE Path3.value_changed TO Planet3.set_rotation
+ROUTE Path4.value_changed TO Planet4.set_rotation
+ROUTE SUNTIMER.fraction_changed TO SUNROTATOR.set_fraction
+ROUTE SUNROTATOR.value_changed TO SUN.set_rotation
+ROUTE Path4.value_changed TO Planet4R.set_rotation
+ROUTE Path5.value_changed TO Planet5.set_rotation
+ROUTE Path6.value_changed TO Planet6.set_rotation
+ROUTE Path7.value_changed TO Planet7.set_rotation
+
+###asteroids
+Group {
+   children [ 
+      
+
+      # Several orbiting planets
+      DEF Planet1 Transform {
+  translation 50 0.0 0.0
+  center -50 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/asteroid.jpeg" }
+     }
+     geometry Sphere { radius 0.22 }
+  }
+      },
+      DEF Planet2 Transform {
+  translation 52.0 0.0 0.0
+  center -52.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/asteroid.jpeg" }
+     }
+     geometry Sphere { radius 0.32 }
+  }
+      },
+      DEF Planet3 Transform {
+  translation 53.0 0.0 0.0
+  center -53.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/asteroid.jpeg" }
+     }
+     geometry Sphere { radius 0.45 }
+  }
+      },
+      DEF Planet4 Transform {
+  translation 54.0 0.0 0.0
+  center -54.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+  texture ImageTexture {
+      #url "img/asteroid.jpeg"
+       }
+        }
+     geometry Sphere { radius 0.71 }
+  }
+      },     
+    
+    DEF Planet5 Transform {
+  translation 55.0 0.0 0.0
+  center -55.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/asteroid.jpeg" }
+     }
+     geometry Sphere { radius 1.0 }
+  }
+      },    
+     
+     DEF Planet6 Transform {
+  translation 56.0 0.0 0.0
+  center -56.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/asteroid.jpeg" }
+     }
+     geometry Sphere { radius 0.32 }
+  }
+      },    
+
+ DEF Planet7 Transform {
+  translation 57.0 0.0 0.0
+  center -57.0 0.0 0.0
+  children Shape {
+     appearance Appearance {
+        material Material { }
+        texture ImageTexture {
+   url "img/asteroid.jpeg" }
+     }
+     geometry Sphere { radius 0.8 }
+  }
+      },
+   
+
+
+
+      # Animation clocks, one per planet ans sun...
+      DEF Clock1 TimeSensor {#
+  cycleInterval 2.0
+  loop TRUE
+      },
+      DEF Clock2 TimeSensor {
+  cycleInterval 3.5
+  loop TRUE
+      },
+      DEF Clock3 TimeSensor {
+  cycleInterval 5.0
+  loop TRUE
+      },
+      DEF Clock4 TimeSensor {
+  cycleInterval 6.5
+  loop TRUE
+      },
+      DEF Clock5 TimeSensor {
+  cycleInterval 8.0
+  loop TRUE
+      },
+      DEF Clock6 TimeSensor {
+  cycleInterval 9.5
+  loop TRUE
+      },
+
+      DEF Clock7 TimeSensor {
+  cycleInterval 10.0
+  loop TRUE
+      },
+  DEF SUNTIMER TimeSensor {
+    loop TRUE
+    cycleInterval 10.0
+}
+
+      # Animation paths, one per planet and sun...
+      DEF Path1 OrientationInterpolator {
+  key [ 0.0, 0.50, 1.0 ]
+  keyValue [  #especifica la lista de las rotaciones claves, cada rotación tiene un grupo de 4 valores
+    0 0.995037 0.0995037 0.0,  # los 1eros 3 valores identifican a X, Y, Z del eje de rotación, 
+ # el 4to valor identifica el ángulo de rotación (en grados).
+    0 0.995037 0.0995037 3.14,
+    0 0.995037 0.0995037 6.28
+   ]
+      },
+      DEF Path2 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    -0.0775436 0.996989 0  0.0,
+    -0.0775436 0.996989 0  3.14,
+    -0.0775436 0.996989 0  6.28
+   ]
+      },
+      DEF Path3 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    0 0.996989 0.0775436 0.0,
+    0 0.996989 0.0775436 3.14,
+    0 0.996989 0.0775436 6.28
+   ]
+      },
+      DEF Path4 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    -0.0775436 0.996989 0  0.0,
+    -0.0775436 0.996989 0  3.14,
+    -0.0775436 0.996989 0  6.28
+   ]
+      },
+
+      DEF Path5 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    0 0.996989 0.0775436 0.0,
+    0 0.996989 0.0775436 3.14,
+    0 0.996989 0.0775436 6.28
+   ]
+      },
+
+  DEF SUNROTATOR OrientationInterpolator {
+    key [ 0, 0.5, 1 ]
+    keyValue [ 0 1 0 0, 0 1 0 3.141, 0 1 0 6.282 ]
+},
+
+      DEF Path6 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    -0.0775436 0.996989 0  0.0,
+    -0.0775436 0.996989 0  3.14,
+    -0.0775436 0.996989 0  6.28
+   ]
+      },
+      DEF Path7 OrientationInterpolator {
+  key [ 0.0 0.50 1.0 ]
+  keyValue [
+    0 0.996989 0.0775436 0.0,
+    0 0.996989 0.0775436 3.14,
+    0 0.996989 0.0775436 6.28
+   ]
+      }
+
+     ]
+}
+ROUTE Clock1.fraction_changed TO Path1.set_fraction
+ROUTE Clock2.fraction_changed TO Path2.set_fraction
+ROUTE Clock3.fraction_changed TO Path3.set_fraction
+ROUTE Clock4.fraction_changed TO Path4.set_fraction
+ROUTE Clock5.fraction_changed TO Path5.set_fraction
+ROUTE Clock6.fraction_changed TO Path6.set_fraction
+ROUTE Clock7.fraction_changed TO Path7.set_fraction
+ROUTE Path1.value_changed TO Planet1.set_rotation
+ROUTE Path2.value_changed TO Planet2.set_rotation
+ROUTE Path3.value_changed TO Planet3.set_rotation
+ROUTE Path4.value_changed TO Planet4.set_rotation
+ROUTE SUNTIMER.fraction_changed TO SUNROTATOR.set_fraction
+ROUTE SUNROTATOR.value_changed TO SUN.set_rotation
+ROUTE Path4.value_changed TO Planet4R.set_rotation
+ROUTE Path5.value_changed TO Planet5.set_rotation
+ROUTE Path6.value_changed TO Planet6.set_rotation
+ROUTE Path7.value_changed TO Planet7.set_rotation
+
+
