@@ -1,0 +1,71 @@
+#VRML V2.0 utf8
+Group {
+    children [
+
+        Background {
+            skyColor [ 0 0 0, 0 0 .4, 0 0 0]
+    skyAngle 1.6
+    groundColor [ 1 1 1, 0.8 0.8 0.8, 0.2 0.2 0.2 ]
+    groundAngle [ 1.2, 1.57 ]
+        }
+		
+        NavigationInfo {
+            type  "WALK"
+            speed 2.0
+        },
+
+        Viewpoint {
+            position 0 2 50
+            orientation 0 0 1 0
+        },
+       
+        
+
+	DEF Cone Transform {
+            translation 0 5 0
+            children [
+                Shape {
+                    appearance Appearance {
+                        material Material { diffuseColor 1 1 0
+					    transparency 0.8}
+                    }
+                    geometry Cone {
+                        bottomRadius  6
+                        height       10
+                    }
+                }
+            ]
+        },
+
+	DEF Cube Transform {
+            translation -10 5 10
+            children [
+                Shape {
+                    appearance Appearance {
+                        material Material { diffuseColor 1 0 1 
+					    transparency 0.5}
+			texture ImageTexture {
+				url "mimage.jpg"
+			}
+                    }
+                    geometry Box { 
+			size 8 8 8
+                    }
+                }
+            ]
+        },
+
+	DEF Sphere Transform {
+            translation 10 5 10
+            children [
+                Shape {
+                    geometry Sphere { radius 5 }
+                    appearance Appearance {
+                        material Material {diffuseColor 0 1 0
+					   transparency 0.2}
+                    }
+                }
+            ]
+        },
+    ]
+}
